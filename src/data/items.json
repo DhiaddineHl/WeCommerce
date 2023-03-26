@@ -1,0 +1,30 @@
+[
+    {
+        "id" : 1,
+        "name" : "Bread",
+        "price" : 2.99,
+        "category" : "grocery",
+        "imgUrl" : "/images/bread.jpg"
+    },
+    {
+        "id" : 2,
+        "name" : "ScrewDriver",
+        "price" : 10.99,
+        "category" : "utilities",
+        "imgUrl" : "/images/tournevis2.jpg"
+    },
+    {
+        "id" : 3,
+        "name" : "Play Station",
+        "price" : 1100.99,
+        "category" : "entertainment",
+        "imgUrl" : "/images/playstation2.jpg"
+    },
+    {
+        "id" : 4,
+        "name" : "Fruits",
+        "price" : 6.99,
+        "category" : "grocery",
+        "imgUrl" : "/images/fruits.jpg"
+    }
+]
