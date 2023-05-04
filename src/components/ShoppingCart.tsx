@@ -5,14 +5,22 @@ import formatCurrency from "../utilities/formatCurrency";
 import CartItem from "./CartItem";
 import StoreItems from "../data/items.json";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
+
+
+
 
 interface ShoppingCartProps {
   isOpen: boolean;
 }
 
+
+
+
 const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
   const [total, setTotal] = useState(0);
   const { closeCart, cartItems, cartQuantity } = useShoppingCart();
+  const [cookies, setCookies] = useCookies(["paymentID"]);
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -31,18 +39,23 @@ const ShoppingCart = ({ isOpen }: ShoppingCartProps) => {
       .post(
         "/api/v1/payment/create",
         {
-          beneficiaryId: "4",
+          beneficiaryId: "202",
           total: total,
+          currency : "USD",
+          method : "WePay"
         },
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJheml6QGdtYWlsLmNvbSIsImlhdCI6MTY4MzE5MTk5NSwiZXhwIjoxNjgzMjYwMzk1fQ.LkjlAKvvQvODYv0AtNGDT7lUes54J-BOxoD9HlYRpVE",
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaGlhaGxhb3VpQGdtYWlsLmNvbSIsImlhdCI6MTY4MzE1NzE2MywiZXhwIjoxNjgzMjI1NTYzfQ.sYzMdD8m1Lv5Ig0poF_NKUMhTY1EnSZyTia7roCVdrY",
           },
         }
       )
       .then((response) => {
         console.log(response.data);
+        setCookies("paymentID" , response.data, {sameSite: "none", secure:true});
+        window.location.href = "http://localhost:5174"
+
       })
       .catch((error) => {
         console.log(error);
